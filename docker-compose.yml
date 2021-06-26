@@ -34,6 +34,7 @@ services:
       - ./db/conf.d/my.cnf:/etc/mysql/conf.d/my.cnf
     networks:
       - private-subnet
+    platform: linux/x86_64
 
 networks:
   private-subnet: {}
