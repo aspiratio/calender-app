@@ -3,16 +3,13 @@ import React from "react";
 import { GridList, Typography } from "@material-ui/core";
 
 import CalendarElement from "../CalendarElement";
-import { createCalendar } from "../../services/calendar";
 
 import * as styles from "./style.css";
-
-const calendar = createCalendar();
 
 const days = ["日", "月", "火", "水", "木", "金", "土"];
 
 // 公式ドキュメントより必要なPropsを選択する cols:1行あたりのセル数、spacing:要素間の隙間、cellHeight:セルの高さ autoにすると中の要素で高さが決まる
-const CalendarBoard = () => {
+const CalendarBoard = ({ calendar }) => {
   console.log(calendar);
   return (
     <div>

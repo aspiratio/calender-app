@@ -1,10 +1,10 @@
-// CalendarBoardにまとまっていたロジック（カレンダーを作成する部分）を分離する
+// CalendarBoardにまとまっていたロジック（カレンダーを作成する部分）をこのファイルに分離する
 
 import dayjs from "dayjs";
 
-export const createCalendar = () => {
-  // 今月の最初の日
-  const firstDay = dayjs().startOf("month");
+export const createCalendar = (month) => {
+  // getMonth(month)でその月のdayjsインスタンスを返す
+  const firstDay = getMonth(month);
   // 曜日 0(日曜日)~6(土曜日)
   const firstDayIndex = firstDay.day();
 
@@ -16,6 +16,11 @@ export const createCalendar = () => {
       const day = firstDay.add(diffFromFirstDay, "day");
       return day;
     });
+};
+// dayjsは完全な日付でなくても月や年の情報があれば他をゼロ値で初期化する
+// 年-月という値で初期化
+export const getMonth = ({ year, month }) => {
+  return dayjs(`${year}-${month}`);
 };
 
 // 当日かどうかの判断（dayjs()では時間まで含まれるから"YYYYMMDD"に変換して比較する）
