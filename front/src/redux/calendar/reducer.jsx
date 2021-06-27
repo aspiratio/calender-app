@@ -3,14 +3,12 @@
 
 import dayjs from "dayjs";
 import { CALENDAR_SET_MONTH } from "./actions";
+import { formatMonth } from "../../services/calendar";
 
 const day = dayjs();
 
 // 初期値の定義（今月のカレンダー）
-const init = {
-  year: day.year(),
-  month: day.month() + 1, // day.month()は月情報のインデックスを返す、つまり0~11のため＋1する
-};
+const init = formatMonth(day);
 
 // 特定のactionがdispatchされたときに対応するstateをどのように変更するかの記述
 // reducerは第一引数に直前のstate、第二引数にactionを受け取る

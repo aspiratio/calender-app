@@ -36,3 +36,20 @@ export const isSameMonth = (m1, m2) => {
 
 // 日付が1ならisFirstDay = true, 1以外なら false
 export const isFirstDay = (day) => day.date() === 1;
+
+// redux で管理している月の情報を受け取ったのちに日付として演算するためにgetMonth()でdayjsインスタンスに変換
+// 定義したformatMonthで元のデータフォーマットに戻している
+export const getNextMonth = (month) => {
+  const day = getMonth(month).add(1, "month");
+  return formatMonth(day);
+};
+
+export const getPreviousMonth = (month) => {
+  const day = getMonth(month).add(-1, "month");
+  return formatMonth(day);
+};
+
+export const formatMonth = (day) => ({
+  month: day.month() + 1, // day.month()は月情報のインデックスを返す、つまり0~11のため＋1する
+  year: day.year(),
+});

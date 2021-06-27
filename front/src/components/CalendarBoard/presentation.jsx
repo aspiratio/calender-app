@@ -9,7 +9,7 @@ import * as styles from "./style.css";
 const days = ["日", "月", "火", "水", "木", "金", "土"];
 
 // 公式ドキュメントより必要なPropsを選択する cols:1行あたりのセル数、spacing:要素間の隙間、cellHeight:セルの高さ autoにすると中の要素で高さが決まる
-const CalendarBoard = ({ calendar }) => {
+const CalendarBoard = ({ calendar, month }) => {
   console.log(calendar);
   return (
     <div>
@@ -29,7 +29,7 @@ const CalendarBoard = ({ calendar }) => {
         ))}
         {calendar.map((c) => (
           <li key={c.toISOString()}>
-            <CalendarElement day={c} />
+            <CalendarElement day={c} month={month} />
           </li>
         ))}
       </GridList>

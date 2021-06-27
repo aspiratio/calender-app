@@ -8,6 +8,11 @@ import { createStore } from "redux";
 
 import CalendarBoard from "./components/CalendarBoard/container";
 
+// DatePickerでdayjsを使うため
+import DayjsUtils from "@date-io/dayjs";
+// DatePickerを使うには<MuiPickersUtilsProvider>でラップする必要がある
+import { MuiPickersUtilsProvider } from "@material-ui/pickers";
+
 // このファイルが実行ファイルになるのでdayjsのローカライズもここで行う（初期化時に必ず呼ばれるから）
 import dayjs from "dayjs";
 import "dayjs/locale/ja";
@@ -17,7 +22,7 @@ dayjs.locale("ja");
 import rootReducer from "./redux/rootReducer";
 
 // 上部のアイコンの部分のコンポーネント
-import Navigation from "./components/Navigation/presentation";
+import Navigation from "./components/Navigation/container";
 
 // createStoreにrootReducerを渡してstoreを作成 storeにreducerを登録して使えるようになる
 const store = createStore(rootReducer);
@@ -25,8 +30,10 @@ const store = createStore(rootReducer);
 const App = () => (
   // <Provider>コンポーネントを使って store 情報を全部のコンポーネントから参照できるようにする
   <Provider store={store}>
-    <Navigation />
-    <CalendarBoard />
+    <MuiPickersUtilsProvider utils={DayjsUtils}>
+      <Navigation />
+      <CalendarBoard />
+    </MuiPickersUtilsProvider>
   </Provider>
 );
 

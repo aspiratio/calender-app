@@ -8,7 +8,9 @@ import { createCalendar } from "../../services/calendar";
 const mapStateToProps = (state) => ({ calendar: state.calendar });
 
 // mergePropsはmapStateToPropsで生成されたpropsとmapDispatchToPropsで生成されたpropsを引数にとり、コンポーネントで使う形に整形して渡す関数
+// ここではmapDispatchToPropsがないため、mapStateToPropsだけ
 const mergeProps = (stateProps) => ({
+  month: stateProps.calendar,
   calendar: createCalendar(stateProps.calendar),
 });
 
