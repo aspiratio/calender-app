@@ -24,6 +24,9 @@ import rootReducer from "./redux/rootReducer";
 // 上部のアイコンの部分のコンポーネント
 import Navigation from "./components/Navigation/container";
 
+// ダイアログを表示させる
+import AddScheduleDialog from "./components/AddScheduleDialog/container";
+
 // createStoreにrootReducerを渡してstoreを作成 storeにreducerを登録して使えるようになる
 const store = createStore(rootReducer);
 
@@ -33,6 +36,7 @@ const App = () => (
     <MuiPickersUtilsProvider utils={DayjsUtils}>
       <Navigation />
       <CalendarBoard />
+      <AddScheduleDialog />
     </MuiPickersUtilsProvider>
   </Provider>
 );
