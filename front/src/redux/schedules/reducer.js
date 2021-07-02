@@ -1,6 +1,7 @@
 // 追加された予定やサーバーから取得した予定を管理する
 
 import { SCHEDULES_ADD_ITEM } from "./actions";
+import dayjs from "dayjs";
 
 const init = {
   items: [], // dialog から作成しschedule.formのデータ構造を配列で持つ必要があるため

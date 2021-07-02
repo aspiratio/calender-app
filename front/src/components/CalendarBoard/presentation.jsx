@@ -9,12 +9,7 @@ import * as styles from "./style.css";
 const days = ["日", "月", "火", "水", "木", "金", "土"];
 
 // 公式ドキュメントより必要なPropsを選択する cols:1行あたりのセル数、spacing:要素間の隙間、cellHeight:セルの高さ autoにすると中の要素で高さが決まる
-const CalendarBoard = ({
-  calendar,
-  month,
-  openAddScheduleDialog,
-  schedules,
-}) => {
+const CalendarBoard = ({ calendar, month, openAddScheduleDialog }) => {
   return (
     <div className={styles.container}>
       <GridList className={styles.grid} cols={7} spacing={0} cellHeight="auto">
@@ -31,9 +26,12 @@ const CalendarBoard = ({
             </Typography>
           </li>
         ))}
-        {calendar.map((c) => (
-          <li key={c.toISOString()} onClick={() => openAddScheduleDialog(c)}>
-            <CalendarElement day={c} month={month} />
+        {calendar.map(({ date, schedules }) => (
+          <li
+            key={date.toISOString()}
+            onClick={() => openAddScheduleDialog(date)}
+          >
+            <CalendarElement day={date} month={month} schedules={schedules} />
           </li>
         ))}
       </GridList>

@@ -6,6 +6,7 @@ import {
   addScheduleOpenDialog,
   addScheduleSetValue,
 } from "../../redux/addSchedule/actions";
+import { setSchedules } from "../../services/schedule";
 
 // mapStateToPropsは、store から必要な状態を選択して props の形にする関数。
 // 実行時に state が渡されるのでそれをコンポーネントで使う名前で渡している
@@ -24,13 +25,22 @@ const mapDispatchToProps = (dispatch) => ({
 });
 
 // mergePropsはmapStateToPropsで生成されたpropsとmapDispatchToPropsで生成されたpropsを引数にとり、コンポーネントで使う形に整形して渡す関数
-// ここではmapDispatchToPropsがないため、mapStateToPropsだけ
-const mergeProps = (stateProps, dispatchProps) => ({
-  ...stateProps,
-  month: stateProps.calendar,
-  ...dispatchProps,
-  calendar: createCalendar(stateProps.calendar),
-});
+const mergeProps = (stateProps, dispatchProps) => {
+  const {
+    calendar: month,
+    schedules: { items: schedules },
+  } = stateProps;
+
+  // services/schedulesで作ったsetSchedulesでcalendarをつくる
+  const calendar = setSchedules(createCalendar(month), schedules);
+
+  return {
+    ...stateProps,
+    ...dispatchProps,
+    calendar,
+    month,
+  };
+};
 
 export default connect(
   mapStateToProps,
