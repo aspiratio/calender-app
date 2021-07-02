@@ -9,7 +9,10 @@ import {
 
 // mapStateToPropsは、store から必要な状態を選択して props の形にする関数。
 // 実行時に state が渡されるのでそれをコンポーネントで使う名前で渡している
-const mapStateToProps = (state) => ({ calendar: state.calendar });
+const mapStateToProps = (state) => ({
+  calendar: state.calendar,
+  schedules: state.schedules,
+});
 
 // isDialogOpenをtrueに変更するための関数
 const mapDispatchToProps = (dispatch) => ({
@@ -24,8 +27,8 @@ const mapDispatchToProps = (dispatch) => ({
 // ここではmapDispatchToPropsがないため、mapStateToPropsだけ
 const mergeProps = (stateProps, dispatchProps) => ({
   ...stateProps,
-  ...dispatchProps,
   month: stateProps.calendar,
+  ...dispatchProps,
   calendar: createCalendar(stateProps.calendar),
 });
 
