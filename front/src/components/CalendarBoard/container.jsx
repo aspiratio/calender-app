@@ -1,3 +1,4 @@
+// カレンダートップページのロジックを管理するコンポーネント
 // container は redux からの state と redux に dispatch する関数を props として提供するためのコンポーネント
 import { connect } from "react-redux";
 import CalendarBoard from "./presentation";
@@ -7,6 +8,10 @@ import {
   addScheduleSetValue,
 } from "../../redux/addSchedule/actions";
 import { setSchedules } from "../../services/schedule";
+import {
+  currentScheduleSetItem,
+  currentScheduleOpenDialog,
+} from "../../redux/currentSchedule/actions";
 
 // mapStateToPropsは、store から必要な状態を選択して props の形にする関数。
 // 実行時に state が渡されるのでそれをコンポーネントで使う名前で渡している
@@ -21,6 +26,14 @@ const mapDispatchToProps = (dispatch) => ({
     dispatch(addScheduleOpenDialog());
     // ダイアログを開く時に現在の日付データを受け取ってセットする dにはdayjsオブジェクトが入る
     dispatch(addScheduleSetValue({ date: d }));
+  },
+  // components/Schedule/index.jsxに書いたonClickSchedule()として実行したい関数
+  openCurrentScheduleDialog: (schedule, e) => {
+    // 他のイベントが発火するのをキャンセル これがないと予定追加のダイアログも開いてしまう
+    e.stopPropagation();
+
+    dispatch(currentScheduleSetItem(schedule));
+    dispatch(currentScheduleOpenDialog());
   },
 });
 

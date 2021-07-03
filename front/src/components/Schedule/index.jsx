@@ -2,8 +2,16 @@ import React from "react";
 
 import * as styles from "./style.css";
 
-const Schedule = ({ schedule }) => {
-  return <div className={styles.schedule}>{schedule.title}</div>;
+const Schedule = ({ schedule, onClickSchedule }) => {
+  return (
+    <div
+      className={styles.schedule}
+      // onClickScheduleの第一引数にコンポーネントで表示しているschedule、第二引数にクリックイベントの内容
+      onClick={(e) => onClickSchedule(schedule, e)}
+    >
+      {schedule.title}
+    </div>
+  );
 };
 
 export default Schedule;

@@ -27,6 +27,9 @@ import Navigation from "./components/Navigation/container";
 // ダイアログを表示させる
 import AddScheduleDialog from "./components/AddScheduleDialog/container";
 
+// 予定詳細のダイアログを表示させる
+import CurrentScheduleDialog from "./components/CurrentScheduleDialog/container";
+
 // createStoreにrootReducerを渡してstoreを作成 storeにreducerを登録して使えるようになる
 const store = createStore(rootReducer);
 
@@ -37,6 +40,7 @@ const App = () => (
       <Navigation />
       <CalendarBoard />
       <AddScheduleDialog />
+      <CurrentScheduleDialog />
     </MuiPickersUtilsProvider>
   </Provider>
 );

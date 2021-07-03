@@ -1,3 +1,5 @@
+// カレンダーの中身の見た目を管理するコンポーネント
+
 import React from "react";
 import { Typography } from "@material-ui/core";
 import dayjs from "dayjs";
@@ -10,7 +12,8 @@ import {
 } from "../../services/calendar";
 import Schedule from "../Schedule";
 
-const CalendarElement = ({ day, month, schedules }) => {
+// propsに残った変数（ここではonClickScheduleだけ）を全て格納 普通にonClickScheduleと書いてもいいがあえて試しに書いている
+const CalendarElement = ({ day, month, schedules, ...props }) => {
   const today = dayjs();
   // 今月以外をグレーダウン
   const currentMonth = getMonth(month); // monthをdayjsのインスタンスに変換
@@ -39,7 +42,8 @@ const CalendarElement = ({ day, month, schedules }) => {
       </Typography>
       <div className={styles.schedules}>
         {schedules.map((e) => (
-          <Schedule key={e.id} schedule={e} />
+          // propsの格納と同様にこちらも{...props}の書き方
+          <Schedule key={e.id} schedule={e} {...props} />
         ))}
       </div>
     </div>
