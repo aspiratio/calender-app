@@ -14,6 +14,7 @@ const init = {
     description: "",
     date: dayjs(),
     location: "",
+    studyTime: "",
   },
   isDialogOpen: false,
   isStartEdit: false,

@@ -17,6 +17,7 @@ import {
   NotesOutlined,
   AccessTime,
   Close,
+  DesktopMac,
 } from "@material-ui/icons";
 import * as styles from "./style.css";
 import { DatePicker } from "@material-ui/pickers";
@@ -32,7 +33,7 @@ const Title = withStyles({
 const AddScheduleDialog = ({
   schedule: {
     // src/redux/addSchedule/reducer.jsでformというstateの中に変数を定義しているので、それを分割代入で受け取っている
-    form: { title, location, description, date },
+    form: { title, location, description, date, studyTime },
     isDialogOpen,
     isStartEdit,
   },
@@ -122,6 +123,18 @@ const AddScheduleDialog = ({
                 onChange={(e) => setSchedule({ description: e.target.value })}
               />
             </Grid>
+          </Grid>
+          <Grid item>
+            <DesktopMac />
+          </Grid>
+          <Grid item xs={10}>
+            <TextField
+              style={spacer}
+              fullWidth
+              placeholder="勉強時間"
+              value={studyTime}
+              onChange={(e) => setSchedule({ studyTime: e.target.value })}
+            />
           </Grid>
         </Grid>
       </DialogContent>

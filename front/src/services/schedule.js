@@ -33,4 +33,7 @@ export const isCloseDialog = (schedule) => {
 // scheduleのtitle, description, locationすべてが空のときにtrueになる
 // どれかひとつでも入力されていたときだけcomfirmが出るようにするため
 const isScheduleEmpty = (schedule) =>
-  !schedule.title && !schedule.description && !schedule.location;
+  !schedule.title &&
+  !schedule.description &&
+  !schedule.location &&
+  !schedule.studyTime;
