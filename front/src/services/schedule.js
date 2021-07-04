@@ -23,3 +23,14 @@ export const formatSchedule = (schedule) => ({
   ...schedule,
   date: dayjs(schedule.date),
 });
+
+export const isCloseDialog = (schedule) => {
+  const message = "保存されていない変更を破棄しますか？";
+  // isScheduleEmpty(schedule)がtrueなら、confirmの処理にはいかずreturnでtrueが返る
+  return isScheduleEmpty(schedule) || window.confirm(message);
+};
+
+// scheduleのtitle, description, locationすべてが空のときにtrueになる
+// どれかひとつでも入力されていたときだけcomfirmが出るようにするため
+const isScheduleEmpty = (schedule) =>
+  !schedule.title && !schedule.description && !schedule.location;
