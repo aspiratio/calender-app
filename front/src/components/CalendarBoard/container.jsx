@@ -12,6 +12,7 @@ import {
   currentScheduleSetItem,
   currentScheduleOpenDialog,
 } from "../../redux/currentSchedule/actions";
+import { asyncSchedulesFetchItem } from "../../redux/schedules/effects";
 
 // mapStateToPropsは、store から必要な状態を選択して props の形にする関数。
 // 実行時に state が渡されるのでそれをコンポーネントで使う名前で渡している
@@ -35,6 +36,11 @@ const mapDispatchToProps = (dispatch) => ({
     dispatch(currentScheduleSetItem(schedule));
     dispatch(currentScheduleOpenDialog());
   },
+  // mapDispatchToPropsには取得するべき月の情報がないので、mergePropsから現在の月情報をstateから取得する
+  // それを元にfetchScheduleを呼び出して必要な予定を取得する
+  fetchSchedule: (month) => {
+    dispatch(asyncSchedulesFetchItem(month));
+  },
 });
 
 // mergePropsはmapStateToPropsで生成されたpropsとmapDispatchToPropsで生成されたpropsを引数にとり、コンポーネントで使う形に整形して渡す関数
@@ -50,6 +56,7 @@ const mergeProps = (stateProps, dispatchProps) => {
   return {
     ...stateProps,
     ...dispatchProps,
+    fetchSchedule: () => dispatchProps.fetchSchedule(month),
     calendar,
     month,
   };

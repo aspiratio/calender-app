@@ -1,6 +1,6 @@
 // カレンダートップページの見た目を管理するコンポーネント
 
-import React from "react";
+import React, { useEffect } from "react";
 // import GridList from '@material-ui/core/GridList'の方が早いかも
 import { GridList, Typography } from "@material-ui/core";
 
@@ -16,7 +16,13 @@ const CalendarBoard = ({
   month,
   openAddScheduleDialog,
   openCurrentScheduleDialog,
+  fetchSchedule,
 }) => {
+  console.log(calendar);
+  useEffect(() => {
+    // 初回のみdataを取得
+    fetchSchedule();
+  }, []);
   return (
     <div className={styles.container}>
       <GridList className={styles.grid} cols={7} spacing={0} cellHeight="auto">

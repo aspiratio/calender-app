@@ -1,4 +1,5 @@
 import { isSameDay } from "./calendar";
+import dayjs from "dayjs";
 
 export const setSchedules = (calendar, schedules) =>
   // propsから分割代入したcalendarはDayjsのオブジェクトの配列 そこから一つずつオブジェクトを取り出してdateに入れる
@@ -16,3 +17,9 @@ export const setSchedules = (calendar, schedules) =>
     date: c,
     schedules: schedules.filter((e) => isSameDay(e.date, c)),
   }));
+
+// scheduleの要素の中から、dateだけをdayjsのインスタンスに変換 ほかはそのままだから...schedule
+export const formatSchedule = (schedule) => ({
+  ...schedule,
+  date: dayjs(schedule.date),
+});

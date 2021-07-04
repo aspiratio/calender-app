@@ -11,6 +11,8 @@ import {
 
 import { calendarSetMonth } from "../../redux/calendar/actions";
 
+import { asyncSchedulesFetchItem } from "../../redux/schedules/effects";
+
 // mapStateToPropsは、store から必要な状態を選択して props の形にする関数。
 // 実行時に state が渡されるのでそれをコンポーネントで使う名前で渡している
 const mapStateToProps = (state) => ({ calendar: state.calendar });
@@ -20,6 +22,9 @@ const mapStateToProps = (state) => ({ calendar: state.calendar });
 const mapDispatchToProps = (dispatch) => ({
   setMonth: (month) => {
     dispatch(calendarSetMonth(month));
+  },
+  fetchItem: (month) => {
+    dispatch(asyncSchedulesFetchItem(month));
   },
 });
 
@@ -31,15 +36,18 @@ const mergeProps = (stateProps, dispatchProps) => ({
   setNextMonth: () => {
     const nextMonth = getNextMonth(stateProps.calendar);
     dispatchProps.setMonth(nextMonth);
+    dispatchProps.fetchItem(nextMonth);
   },
   setPreviousMonth: () => {
     const previousMonth = getPreviousMonth(stateProps.calendar);
     dispatchProps.setMonth(previousMonth);
+    dispatchProps.fetchItem(previousMonth);
   },
   setMonth: (dayObj) => {
     // dayjsのインスタンスをReduxのstateに変換
     const month = formatMonth(dayObj);
     dispatchProps.setMonth(month);
+    dispatchProps.fetchItem(month);
   },
 });
 

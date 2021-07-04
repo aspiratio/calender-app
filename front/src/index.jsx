@@ -3,8 +3,13 @@ import ReactDOM from "react-dom";
 
 // Providerはreact がどの store を使うのかを定義するため
 import { Provider } from "react-redux";
+
 // storeは一番上のコンポーネントで作成
-import { createStore } from "redux";
+// applyMiddlewareを追加する（拡張機能のようなもの）
+import { createStore, applyMiddleware } from "redux";
+
+// redux-thunkを使えるようにする（非同期処理をするmiddleware）
+import thunk from "redux-thunk";
 
 import CalendarBoard from "./components/CalendarBoard/container";
 
@@ -31,7 +36,7 @@ import AddScheduleDialog from "./components/AddScheduleDialog/container";
 import CurrentScheduleDialog from "./components/CurrentScheduleDialog/container";
 
 // createStoreにrootReducerを渡してstoreを作成 storeにreducerを登録して使えるようになる
-const store = createStore(rootReducer);
+const store = createStore(rootReducer, applyMiddleware(thunk));
 
 const App = () => (
   // <Provider>コンポーネントを使って store 情報を全部のコンポーネントから参照できるようにする
