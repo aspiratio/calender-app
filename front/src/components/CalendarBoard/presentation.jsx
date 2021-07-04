@@ -18,7 +18,6 @@ const CalendarBoard = ({
   openCurrentScheduleDialog,
   fetchSchedule,
 }) => {
-  console.log(calendar);
   useEffect(() => {
     // 初回のみdataを取得
     fetchSchedule();
