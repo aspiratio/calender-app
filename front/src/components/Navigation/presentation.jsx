@@ -1,6 +1,12 @@
 import React from "react";
 import { DatePicker } from "@material-ui/pickers";
-import { IconButton, Toolbar, Typography, withStyles } from "@material-ui/core";
+import {
+  IconButton,
+  Toolbar,
+  Typography,
+  withStyles,
+  Tooltip,
+} from "@material-ui/core";
 
 // 公式ドキュメントのMaterial Iconsを参照
 // 必要なアイコンを探してそれを import するだけで使うことができる
@@ -36,12 +42,17 @@ const Navigation = ({ setNextMonth, setPreviousMonth, setMonth, month }) => {
       <StyledTypography color="textSecondary" variant="h5" component="h1">
         カレンダー
       </StyledTypography>
-      <IconButton size="small" onClick={setPreviousMonth}>
-        <ArrowBackIos />
-      </IconButton>
-      <IconButton size="small" onClick={setNextMonth}>
-        <ArrowForwardIos />
-      </IconButton>
+      <Tooltip title="前の月" placement="bottom">
+        <IconButton size="small" onClick={setPreviousMonth}>
+          <ArrowBackIos />
+        </IconButton>
+      </Tooltip>
+      <Tooltip title="次の月" placement="bottom">
+        <IconButton size="small" onClick={setNextMonth}>
+          <ArrowForwardIos />
+        </IconButton>
+      </Tooltip>
+
       <StyledDatePicker
         value={month}
         onChange={setMonth}
