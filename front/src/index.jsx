@@ -35,6 +35,9 @@ import AddScheduleDialog from "./components/AddScheduleDialog/container";
 // 予定詳細のダイアログを表示させる
 import CurrentScheduleDialog from "./components/CurrentScheduleDialog/container";
 
+// エラーメッセージのスナックバーを表示させる
+import ErrorSnackbar from "./components/ErrorSnackbar/container";
+
 // createStoreにrootReducerを渡してstoreを作成 storeにreducerを登録して使えるようになる
 const store = createStore(rootReducer, applyMiddleware(thunk));
 
@@ -46,6 +49,7 @@ const App = () => (
       <CalendarBoard />
       <AddScheduleDialog />
       <CurrentScheduleDialog />
+      <ErrorSnackbar />
     </MuiPickersUtilsProvider>
   </Provider>
 );
